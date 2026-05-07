@@ -96,14 +96,21 @@
   /* ── Contact form ──────────────────────────────────────── */
   const form = document.getElementById('contact-form');
   const submitBtn = document.getElementById('submit-btn');
+  const formRenderedAt = Date.now();
   if (form) {
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      const name    = document.getElementById('f-name').value.trim();
-      const email   = document.getElementById('f-email').value.trim();
-      const message = document.getElementById('f-message').value.trim();
+      const payload = {
+        name:    document.getElementById('f-name').value.trim(),
+        email:   document.getElementById('f-email').value.trim(),
+        company: document.getElementById('f-company').value.trim(),
+        service: document.getElementById('f-service').value,
+        message: document.getElementById('f-message').value.trim(),
+        url:     document.getElementById('f-url').value,
+        elapsed: Date.now() - formRenderedAt,
+      };
 
-      if (!name || !email || !message) {
+      if (!payload.name || !payload.email || !payload.message) {
         submitBtn.textContent = 'FILL REQUIRED FIELDS';
         submitBtn.style.background = '#ff4444';
         setTimeout(() => {
@@ -116,8 +123,15 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'SENDING...';
 
-      /* Replace this timeout with your actual form handler (Formspree, Netlify, etc.) */
-      setTimeout(() => {
+      try {
+        const res = await fetch('/contact.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Send failed');
+
         submitBtn.textContent = 'MESSAGE SENT ✓';
         submitBtn.style.background = '#4ade80';
         submitBtn.style.color = '#141210';
@@ -125,9 +139,18 @@
         setTimeout(() => {
           submitBtn.textContent = 'SEND MESSAGE';
           submitBtn.style.background = '';
+          submitBtn.style.color = '';
           submitBtn.disabled = false;
         }, 4000);
-      }, 1200);
+      } catch (err) {
+        submitBtn.textContent = 'SEND FAILED — TRY AGAIN';
+        submitBtn.style.background = '#ff4444';
+        setTimeout(() => {
+          submitBtn.textContent = 'SEND MESSAGE';
+          submitBtn.style.background = '';
+          submitBtn.disabled = false;
+        }, 3500);
+      }
     });
   }
 
