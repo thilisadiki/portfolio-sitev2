@@ -131,4 +131,39 @@
     });
   }
 
+  /* ── Article modal ─────────────────────────────────────── */
+  const modal        = document.getElementById('article-modal');
+  const modalOverlay = modal.querySelector('.modal-overlay');
+  const modalClose   = modal.querySelector('.modal-close');
+  let lastFocused    = null;
+
+  function openArticleModal() {
+    lastFocused = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    modalClose.focus();
+  }
+
+  window.closeArticleModal = function () {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    if (lastFocused) lastFocused.focus();
+  };
+
+  modalOverlay.addEventListener('click', window.closeArticleModal);
+  modalClose.addEventListener('click', window.closeArticleModal);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      window.closeArticleModal();
+    }
+  });
+
+  document.querySelectorAll('.insight-entry').forEach(entry => {
+    entry.addEventListener('click', e => {
+      e.preventDefault();
+      openArticleModal();
+    });
+  });
+
 })();
