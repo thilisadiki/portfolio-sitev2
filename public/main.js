@@ -158,6 +158,7 @@
   const modal        = document.getElementById('article-modal');
   const modalOverlay = modal.querySelector('.modal-overlay');
   const modalClose   = modal.querySelector('.modal-close');
+  const modalCta     = modal.querySelector('.modal-cta');
   let lastFocused    = null;
 
   function openArticleModal() {
@@ -167,18 +168,19 @@
     modalClose.focus();
   }
 
-  window.closeArticleModal = function () {
+  function closeArticleModal() {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     if (lastFocused) lastFocused.focus();
-  };
+  }
 
-  modalOverlay.addEventListener('click', window.closeArticleModal);
-  modalClose.addEventListener('click', window.closeArticleModal);
+  modalOverlay.addEventListener('click', closeArticleModal);
+  modalClose.addEventListener('click', closeArticleModal);
+  modalCta.addEventListener('click', closeArticleModal);
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && modal.classList.contains('open')) {
-      window.closeArticleModal();
+      closeArticleModal();
     }
   });
 
@@ -188,5 +190,13 @@
       openArticleModal();
     });
   });
+
+  /* ── Back-to-top button ────────────────────────────────── */
+  const backTop = document.querySelector('.back-top');
+  if (backTop) {
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
 })();

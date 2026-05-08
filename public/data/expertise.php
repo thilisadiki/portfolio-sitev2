@@ -2,7 +2,7 @@
 
 return [
     [
-        'title'       => 'Rendering &amp; Indexation',
+        'title'       => 'Rendering & Indexation',
         'description' => 'How search engines process JavaScript, handle deferred content, and decide what reaches the index.',
         'items'       => ['Evergreen Googlebot / WRS', 'SSR vs CSR indexation gaps', 'DOM diffing and render parity', 'URL Inspection API analysis'],
     ],
@@ -42,7 +42,7 @@ return [
         'items'       => ['Google Business Profile', 'Local pack optimisation', 'NAP consistency systems', 'Review strategy'],
     ],
     [
-        'title'       => 'Search Intent &amp; IA',
+        'title'       => 'Search Intent & IA',
         'description' => 'Matching page types to search intent at a structural level, not just keyword mapping, but information design informed by how queries behave.',
         'items'       => ['SERP feature analysis', 'Intent-to-template mapping', 'Content hierarchy design', 'Search demand modelling'],
     ],

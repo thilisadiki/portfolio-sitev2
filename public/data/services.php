@@ -38,13 +38,13 @@ return [
         'methods'     => ['URL taxonomy', 'Internal linking', 'Faceted nav', 'Crawl mapping'],
     ],
     [
-        'title'       => 'Local SEO &amp; Google Business Profile',
+        'title'       => 'Local SEO & Google Business Profile',
         'description' => 'Local search has its own infrastructure. GBP optimisation, NAP consistency across citation sources, local schema implementation, and service-area strategy, done with the same precision applied to enterprise technical audits, not handed off to a VA with a generic checklist.',
         'deliverable' => 'Local SEO audit + GBP optimisation plan + citation strategy',
         'methods'     => ['GBP management', 'Local schema', 'Citation audit', 'NAP consistency'],
     ],
     [
-        'title'       => 'SEO Consulting &amp; Fractional Leadership',
+        'title'       => 'SEO Consulting & Fractional Leadership',
         'description' => 'Embedded advisory for in-house teams that need a senior technical SEO perspective without the overhead of a full-time hire. Roadmap development, team upskilling, sprint planning input, quarterly technical health reviews, and a standing resource for the hard questions that surface mid-project.',
         'deliverable' => 'SEO roadmap + team playbooks + ongoing review cadence',
         'methods'     => ['Roadmap design', 'Team training', 'Sprint input'],

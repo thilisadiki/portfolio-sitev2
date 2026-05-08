@@ -114,12 +114,15 @@
 }
 
 @media (max-width: 960px) {
+  .hero-inner { padding-top: 100px; padding-bottom: 48px; }
   .hero-bottom { grid-template-columns: 1fr; gap: 32px; }
   .hero-stats { flex-direction: row; align-items: flex-start; }
   .h-stat { text-align: left; }
 }
 
 @media (max-width: 600px) {
-  .hero-inner { padding-left: 20px; padding-right: 20px; }
+  .hero-inner { padding: 72px 20px 32px; }
+  .hero-eyebrow { margin-bottom: 24px; }
+  .hero-heading { margin-bottom: 24px; }
   .hero-stats { gap: 24px; }
 }

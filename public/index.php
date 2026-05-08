@@ -1,3 +1,13 @@
+<?php
+function e(string $s): string {
+    return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+$services   = require __DIR__ . '/data/services.php';
+$expertise  = require __DIR__ . '/data/expertise.php';
+$industries = require __DIR__ . '/data/industries.php';
+$projects   = require __DIR__ . '/data/projects.php';
+$insights   = require __DIR__ . '/data/insights.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -239,14 +249,6 @@
           itself, then communicate all of it clearly to both
           your CTO and your marketing director.
         </p>
-        <p class="fade fade-d4">
-          <strong>Most companies still haven't figured out what this
-          role actually is.</strong> They either hire an SEO agency
-          that doesn't understand frontend rendering, or they ask a
-          developer to handle SEO without any search systems context.
-          The result is visibility left on the table. Often
-          substantial organic revenue never realised.
-        </p>
       </div>
 
       <aside class="about-aside fade fade-d1" aria-label="Technical skills">
@@ -284,189 +286,23 @@
     </div>
 
     <ol class="service-list" aria-label="Services">
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">01</span>
-        <div class="service-main">
-          <h3>Technical SEO Audits</h3>
-          <p>
-            Diagnostic-first analysis of your site's crawlability, indexability,
-            rendering pipeline, and search infrastructure. Not a checklist run
-            through a SaaS tool: a precise investigation that produces a
-            clear causal picture of why your site performs the way it does,
-            with prioritised remediation paths you can actually act on.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> Full audit report with severity-ranked issues and sprint-ready task specifications</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">Crawl analysis</li>
-            <li class="s-tag">Log file audit</li>
-            <li class="s-tag">Rendering review</li>
-            <li class="s-tag">Indexation mapping</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">02</span>
-        <div class="service-main">
-          <h3>JavaScript SEO</h3>
-          <p>
-            Your React, Next.js, Vue, or Angular application may be largely
-            invisible to Googlebot. I diagnose and fix rendering issues at the
-            framework level: SSR versus CSR trade-offs, hydration timing,
-            dynamic content that never makes it into the indexed DOM, and
-            metadata that exists only after JavaScript execution.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> Rendering gap report with DOM diffs and a framework-specific implementation specification</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">SSR / SSG / ISR</li>
-            <li class="s-tag">DOM diffing</li>
-            <li class="s-tag">Hydration debugging</li>
-            <li class="s-tag">Dynamic rendering</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">03</span>
-        <div class="service-main">
-          <h3>Core Web Vitals Optimisation</h3>
-          <p>
-            LCP, CLS, INP: each one traced to its origin in your codebase,
-            not just flagged at the surface level. I work from field data
-            (CrUX) and lab data in parallel, identify the specific resources
-            and components responsible, and produce engineering-grade
-            specifications your developers can implement precisely.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> CWV baseline report, per-metric root cause analysis, code-level fix specifications</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">CrUX analysis</li>
-            <li class="s-tag">LCP optimisation</li>
-            <li class="s-tag">CLS elimination</li>
-            <li class="s-tag">INP reduction</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">04</span>
-        <div class="service-main">
-          <h3>Search Rendering Diagnostics</h3>
-          <p>
-            Understand precisely what Google sees when it renders your pages.
-            Using live rendering comparisons, HTTP header inspection, log data,
-            and URL Inspection API output, I map the difference between your
-            user-facing interface and the content that actually reaches Google's
-            index, then explain what it means for your rankings.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> Render comparison analysis with indexed vs. user-visible content map</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">WRS simulation</li>
-            <li class="s-tag">DOM comparison</li>
-            <li class="s-tag">GSC URL Inspection</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">05</span>
-        <div class="service-main">
-          <h3>Web Performance Optimisation</h3>
-          <p>
-            Performance is a ranking signal, a conversion signal, and a
-            retention signal simultaneously. I optimise critical rendering
-            paths, asset delivery strategies, caching architectures, and
-            third-party script impact across your full stack, not just
-            what's visible in a single Lighthouse run.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> Performance audit + infrastructure and code recommendations with business impact estimates</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">TTFB / FCP</li>
-            <li class="s-tag">Asset strategy</li>
-            <li class="s-tag">CDN configuration</li>
-            <li class="s-tag">Bundle analysis</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">06</span>
-        <div class="service-main">
-          <h3>Site Architecture Consulting</h3>
-          <p>
-            URL structure, internal linking systems, faceted navigation,
-            crawl path engineering, designed around how search engines
-            actually discover and evaluate pages at scale. Most site
-            architecture decisions are made without any reference to crawl
-            behaviour. That gap is where ranking potential disappears.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> IA specification with crawl flow diagrams and implementation guidelines</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">URL taxonomy</li>
-            <li class="s-tag">Internal linking</li>
-            <li class="s-tag">Faceted nav</li>
-            <li class="s-tag">Crawl mapping</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">07</span>
-        <div class="service-main">
-          <h3>Local SEO &amp; Google Business Profile</h3>
-          <p>
-            Local search has its own infrastructure. GBP optimisation,
-            NAP consistency across citation sources, local schema implementation,
-            and service-area strategy, done with the same precision applied
-            to enterprise technical audits, not handed off to a VA with a
-            generic checklist.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> Local SEO audit + GBP optimisation plan + citation strategy</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">GBP management</li>
-            <li class="s-tag">Local schema</li>
-            <li class="s-tag">Citation audit</li>
-            <li class="s-tag">NAP consistency</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="service-entry fade">
-        <span class="service-n" aria-hidden="true">08</span>
-        <div class="service-main">
-          <h3>SEO Consulting &amp; Fractional Leadership</h3>
-          <p>
-            Embedded advisory for in-house teams that need a senior technical
-            SEO perspective without the overhead of a full-time hire. Roadmap
-            development, team upskilling, sprint planning input, quarterly
-            technical health reviews, and a standing resource for the hard
-            questions that surface mid-project.
-          </p>
-        </div>
-        <div class="service-meta">
-          <p class="service-deliverable"><strong>Deliverable:</strong> SEO roadmap + team playbooks + ongoing review cadence</p>
-          <ul class="service-tags-list" aria-label="Methods">
-            <li class="s-tag">Roadmap design</li>
-            <li class="s-tag">Team training</li>
-            <li class="s-tag">Sprint input</li>
-          </ul>
-        </div>
-      </li>
-
+      <?php foreach ($services as $i => $s): ?>
+        <li class="service-entry fade">
+          <span class="service-n" aria-hidden="true"><?= sprintf('%02d', $i + 1) ?></span>
+          <div class="service-main">
+            <h3><?= e($s['title']) ?></h3>
+            <p><?= e($s['description']) ?></p>
+          </div>
+          <div class="service-meta">
+            <p class="service-deliverable"><strong>Deliverable:</strong> <?= e($s['deliverable']) ?></p>
+            <ul class="service-tags-list" aria-label="Methods">
+              <?php foreach ($s['methods'] as $m): ?>
+                <li class="s-tag"><?= e($m) ?></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </li>
+      <?php endforeach; ?>
     </ol>
   </div>
 </section>
@@ -485,115 +321,18 @@
     </div>
 
     <div class="expertise-grid fade">
-
-      <div class="domain">
-        <p class="domain-num">01</p>
-        <h4>Rendering &amp; Indexation</h4>
-        <p>How search engines process JavaScript, handle deferred content, and decide what reaches the index.</p>
-        <ul class="domain-items">
-          <li>Evergreen Googlebot / WRS</li>
-          <li>SSR vs CSR indexation gaps</li>
-          <li>DOM diffing and render parity</li>
-          <li>URL Inspection API analysis</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">02</p>
-        <h4>Crawl Engineering</h4>
-        <p>Crawl budget allocation, crawl path design, and ensuring the right pages are discovered at the right frequency.</p>
-        <ul class="domain-items">
-          <li>Log file crawl analysis</li>
-          <li>robots.txt architecture</li>
-          <li>Crawl prioritisation systems</li>
-          <li>Crawl trap identification</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">03</p>
-        <h4>Structured Data</h4>
-        <p>JSON-LD implementation, rich result eligibility, and entity-based schema strategies for modern content architectures.</p>
-        <ul class="domain-items">
-          <li>JSON-LD / Microdata</li>
-          <li>Rich result eligibility</li>
-          <li>Entity graph strategy</li>
-          <li>Validation and monitoring</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">04</p>
-        <h4>Web Performance</h4>
-        <p>Field data versus lab data, render-blocking resources, loading strategies, and the performance-to-ranking relationship.</p>
-        <ul class="domain-items">
-          <li>CrUX / PageSpeed Insights</li>
-          <li>Resource loading priorities</li>
-          <li>Third-party script auditing</li>
-          <li>Performance budget design</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">05</p>
-        <h4>Site Architecture</h4>
-        <p>URL taxonomy design, internal linking graph engineering, and faceted navigation systems that crawlers can process efficiently.</p>
-        <ul class="domain-items">
-          <li>URL structure and taxonomy</li>
-          <li>Internal link equity flow</li>
-          <li>Faceted nav canonicalisation</li>
-          <li>Pagination strategies</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">06</p>
-        <h4>JavaScript Framework SEO</h4>
-        <p>Framework-specific SEO patterns, metadata management, hydration timing, and rendering strategy selection for modern stacks.</p>
-        <ul class="domain-items">
-          <li>Next.js App Router SEO</li>
-          <li>Nuxt / Vue rendering</li>
-          <li>SvelteKit / Astro patterns</li>
-          <li>Hydration timing analysis</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">07</p>
-        <h4>Technical Auditing</h4>
-        <p>Combining crawler data, log analysis, Search Console signals, and rendering output into a single diagnostic picture.</p>
-        <ul class="domain-items">
-          <li>Multi-signal diagnosis</li>
-          <li>Screaming Frog configuration</li>
-          <li>Custom GSC data pulls</li>
-          <li>Python-based SEO scripts</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">08</p>
-        <h4>Local Search Visibility</h4>
-        <p>GBP optimisation, local schema, citation architecture, and service-area targeting for competitive local search results.</p>
-        <ul class="domain-items">
-          <li>Google Business Profile</li>
-          <li>Local pack optimisation</li>
-          <li>NAP consistency systems</li>
-          <li>Review strategy</li>
-        </ul>
-      </div>
-
-      <div class="domain">
-        <p class="domain-num">09</p>
-        <h4>Search Intent &amp; IA</h4>
-        <p>Matching page types to search intent at a structural level, not just keyword mapping, but information design informed by how queries behave.</p>
-        <ul class="domain-items">
-          <li>SERP feature analysis</li>
-          <li>Intent-to-template mapping</li>
-          <li>Content hierarchy design</li>
-          <li>Search demand modelling</li>
-        </ul>
-      </div>
-
+      <?php foreach ($expertise as $i => $d): ?>
+        <div class="domain">
+          <p class="domain-num"><?= sprintf('%02d', $i + 1) ?></p>
+          <h4><?= e($d['title']) ?></h4>
+          <p><?= e($d['description']) ?></p>
+          <ul class="domain-items">
+            <?php foreach ($d['items'] as $item): ?>
+              <li><?= e($item) ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -612,99 +351,19 @@
     </div>
 
     <div class="industries-grid fade">
-
-      <div class="industry">
-        <p class="industry-num">01</p>
-        <h4>iGaming</h4>
-        <p class="industry-sub">Online Casinos · Sports Betting · Gaming Platforms</p>
-        <p>
-          iGaming platforms sit at the intersection of heavy JavaScript, strict
-          regulatory environments, and some of the most competitive SERPs on the
-          web. Player acquisition funnels are deeply search-dependent, but most
-          operators run on platforms that render poorly, carry indexation debt,
-          and have no coherent crawl strategy. I understand the compliance
-          constraints, geo-targeting requirements, and responsible gambling
-          content obligations that shape what can and cannot be done with SEO
-          in this space.
-        </p>
-        <ul class="industry-signals">
-          <li>JavaScript-heavy platform rendering and indexation</li>
-          <li>Multi-region and geo-targeted content architecture</li>
-          <li>Responsible gambling compliance in search content</li>
-          <li>Bonus and promotion page SEO without thin content signals</li>
-          <li>Affiliate content ecosystem management</li>
-        </ul>
-      </div>
-
-      <div class="industry">
-        <p class="industry-num">02</p>
-        <h4>Mental Health</h4>
-        <p class="industry-sub">Therapy Platforms · Wellness Apps · Mental Health Providers</p>
-        <p>
-          Mental health is a YMYL category. Google holds content in this space
-          to the highest standards of expertise, authoritativeness, and
-          trustworthiness. Providers who treat SEO casually in this sector
-          lose visibility to competitors who understand the content quality
-          and structured data requirements in depth. Local search is also
-          critical here: most people finding a therapist begin with a
-          location-specific query, and the local pack is where the decision
-          is often made.
-        </p>
-        <ul class="industry-signals">
-          <li>YMYL content standards and EEAT signals</li>
-          <li>Local SEO for individual practitioners and clinics</li>
-          <li>Schema for healthcare providers and services</li>
-          <li>Privacy-safe tracking setup for sensitive verticals</li>
-          <li>Patient journey search intent mapping</li>
-        </ul>
-      </div>
-
-      <div class="industry">
-        <p class="industry-num">03</p>
-        <h4>SaaS</h4>
-        <p class="industry-sub">B2B SaaS · Developer Tools · Platform Businesses</p>
-        <p>
-          SaaS companies almost universally build on modern JavaScript frameworks.
-          That creates a specific class of technical SEO problems: metadata that
-          depends on client-side execution, documentation that search engines
-          cannot index cleanly, and product pages that render differently for
-          bots than for authenticated users. On the content side, SaaS SEO
-          requires precise intent mapping across the awareness-to-conversion
-          funnel, from bottom-of-funnel comparison pages to top-of-funnel
-          educational content that captures the right audience at the right stage.
-        </p>
-        <ul class="industry-signals">
-          <li>JavaScript framework rendering (Next.js, Nuxt, SvelteKit)</li>
-          <li>Documentation site architecture and indexation</li>
-          <li>Bottom-of-funnel comparison and alternative page strategy</li>
-          <li>Core Web Vitals for SaaS application pages</li>
-          <li>Trial and signup funnel search intent alignment</li>
-        </ul>
-      </div>
-
-      <div class="industry">
-        <p class="industry-num">04</p>
-        <h4>Healthcare</h4>
-        <p class="industry-sub">Clinical Practices · Hospitals · Health Tech</p>
-        <p>
-          Healthcare SEO operates under the same YMYL constraints as mental
-          health, with the added complexity of multi-location operations,
-          clinical service taxonomies, and the tension between patient-facing
-          content and medically accurate language. Multi-location healthcare
-          groups frequently have inconsistent GBP profiles, unvalidated
-          structured data across service pages, and citation infrastructure
-          that actively undermines their local visibility. I have direct
-          experience turning that around at scale.
-        </p>
-        <ul class="industry-signals">
-          <li>Multi-location local SEO and GBP management at scale</li>
-          <li>MedicalClinic, MedicalProcedure and Physician schema</li>
-          <li>NAP consistency across 80+ citation sources</li>
-          <li>EEAT signals for clinical and health content</li>
-          <li>Patient-centric search intent and content hierarchy</li>
-        </ul>
-      </div>
-
+      <?php foreach ($industries as $i => $ind): ?>
+        <div class="industry">
+          <p class="industry-num"><?= sprintf('%02d', $i + 1) ?></p>
+          <h4><?= e($ind['title']) ?></h4>
+          <p class="industry-sub"><?= e($ind['subtitle']) ?></p>
+          <p><?= e($ind['description']) ?></p>
+          <ul class="industry-signals">
+            <?php foreach ($ind['signals'] as $signal): ?>
+              <li><?= e($signal) ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -723,205 +382,38 @@
     </div>
 
     <ol class="project-list" aria-label="Case studies">
-
-      <!-- Project 01 -->
-      <li class="project-entry fade">
-        <div class="project-top">
-          <span class="project-idx">01</span>
-          <span class="project-type">Technical SEO · Recovery · eCommerce</span>
-          <span class="project-year">2024</span>
-        </div>
-        <div class="project-body">
-          <div class="project-metric" aria-label="312 percent organic traffic increase">
-            <span class="project-metric-val">
-              +<span data-target="312">312</span>%
-            </span>
-            <span class="project-metric-lbl">organic traffic<br>in 6 months</span>
+      <?php foreach ($projects as $i => $p): ?>
+        <li class="project-entry fade">
+          <div class="project-top">
+            <span class="project-idx"><?= sprintf('%02d', $i + 1) ?></span>
+            <span class="project-type"><?= e($p['type']) ?></span>
+            <span class="project-year"><?= e($p['year']) ?></span>
           </div>
-          <div class="project-content">
-            <h3>Enterprise eCommerce: Post-Migration Traffic Recovery</h3>
-            <p>
-              A 4,000-page South African retail brand migrated to a React SPA
-              and lost 74% of organic traffic within 8 weeks. Googlebot was
-              receiving empty HTML shells: every product page was rendering
-              entirely client-side with no fallback content in the server
-              response. The site looked fine to users. To crawlers, it was blank.
-            </p>
-            <p>
-              Full rendering audit using mobile-first Googlebot simulation via
-              the URL Inspection API and log file analysis. Confirmed 94% of
-              product pages returned empty body content in the HTML response.
-              Implemented a phased Next.js SSR migration strategy, introduced
-              dynamic rendering as a transition layer for high-priority URL
-              segments, and rebuilt the sitemap pipeline to prioritise recovery
-              indexation.
-            </p>
-            <div class="project-results" aria-label="Results breakdown">
-              <div class="pr"><span class="pr-val">+312%</span><span class="pr-lbl">Organic traffic</span></div>
-              <div class="pr"><span class="pr-val">3,847</span><span class="pr-lbl">Pages re-indexed</span></div>
-              <div class="pr"><span class="pr-val">6 mo</span><span class="pr-lbl">Full recovery</span></div>
-              <div class="pr"><span class="pr-val">94%</span><span class="pr-lbl">CSR pages fixed</span></div>
+          <div class="project-body">
+            <div class="project-metric" aria-label="<?= e($p['metric_aria']) ?>">
+              <span class="project-metric-val"><?= $p['metric_html'] ?></span>
+              <span class="project-metric-lbl"><?= $p['metric_label_html'] ?></span>
             </div>
-            <div class="project-tools">
-              <span class="p-tool">Screaming Frog</span>
-              <span class="p-tool">GSC URL Inspection API</span>
-              <span class="p-tool">Next.js SSR</span>
-              <span class="p-tool">Log file analysis</span>
-              <span class="p-tool">Splunk</span>
-              <span class="p-timeline">6-month engagement</span>
+            <div class="project-content">
+              <h3><?= e($p['title']) ?></h3>
+              <?php foreach ($p['paragraphs'] as $para): ?>
+                <p><?= e($para) ?></p>
+              <?php endforeach; ?>
+              <div class="project-results" aria-label="Results breakdown">
+                <?php foreach ($p['results'] as [$val, $lbl]): ?>
+                  <div class="pr"><span class="pr-val"><?= e($val) ?></span><span class="pr-lbl"><?= e($lbl) ?></span></div>
+                <?php endforeach; ?>
+              </div>
+              <div class="project-tools">
+                <?php foreach ($p['tools'] as $tool): ?>
+                  <span class="p-tool"><?= e($tool) ?></span>
+                <?php endforeach; ?>
+                <span class="p-timeline"><?= e($p['timeline']) ?></span>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-
-      <!-- Project 02 -->
-      <li class="project-entry fade">
-        <div class="project-top">
-          <span class="project-idx">02</span>
-          <span class="project-type">Core Web Vitals · SaaS · Performance</span>
-          <span class="project-year">2024</span>
-        </div>
-        <div class="project-body">
-          <div class="project-metric" aria-label="LCP improved from 6.8 seconds to 1.9 seconds">
-            <span class="project-metric-val">
-              <span data-target="6">6</span>.<span data-target="8">8</span>s
-            </span>
-            <span class="project-metric-lbl">LCP → 1.9s</span>
-          </div>
-          <div class="project-content">
-            <h3>B2B SaaS Platform: Core Web Vitals Overhaul</h3>
-            <p>
-              A B2B SaaS platform was failing Core Web Vitals across 80% of
-              its URLs, with an average LCP of 6.8 seconds in field data.
-              The marketing team attributed it to hosting. The problem was
-              in the code: an unoptimised hero component, render-blocking
-              font loading, and a bundle loading sequence that deferred
-              critical above-the-fold resources.
-            </p>
-            <p>
-              Traced LCP regression to three specific causes: a 1.8MB
-              uncompressed hero image loaded without priority hints, a
-              Google Fonts stylesheet blocking render for 480ms, and a
-              JavaScript bundle deferring the LCP element paint by 2.1 seconds.
-              Worked directly with the engineering team on implementation.
-              28% conversion rate improvement documented in the following
-              quarter's A/B data.
-            </p>
-            <div class="project-results" aria-label="Results breakdown">
-              <div class="pr"><span class="pr-val">6.8s → 1.9s</span><span class="pr-lbl">LCP field data</span></div>
-              <div class="pr"><span class="pr-val">+28%</span><span class="pr-lbl">Conversion rate</span></div>
-              <div class="pr"><span class="pr-val">100%</span><span class="pr-lbl">URLs passing CWV</span></div>
-            </div>
-            <div class="project-tools">
-              <span class="p-tool">Lighthouse CI</span>
-              <span class="p-tool">CrUX API</span>
-              <span class="p-tool">WebPageTest</span>
-              <span class="p-tool">Next.js Image</span>
-              <span class="p-tool">font-display: optional</span>
-              <span class="p-timeline">10-week engagement</span>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <!-- Project 03 -->
-      <li class="project-entry fade">
-        <div class="project-top">
-          <span class="project-idx">03</span>
-          <span class="project-type">JavaScript SEO · Media · Indexation</span>
-          <span class="project-year">2023</span>
-        </div>
-        <div class="project-body">
-          <div class="project-metric" aria-label="2341 articles recovered from indexation gap">
-            <span class="project-metric-val">
-              <span data-target="2341">2341</span>
-            </span>
-            <span class="project-metric-lbl">articles recovered<br>from indexation gap</span>
-          </div>
-          <div class="project-content">
-            <h3>Digital News Publisher: JavaScript Indexation Gap</h3>
-            <p>
-              A digital news publisher had 2,341 articles published and
-              receiving traffic via social, but zero indexation from organic
-              search. Investigation using the URL Inspection API and direct
-              DOM comparison confirmed Googlebot was rendering an empty article
-              body. The content existed in the DOM, but inside a Vue component
-              that used IntersectionObserver-triggered lazy loading. Content
-              that never entered Googlebot's render viewport.
-            </p>
-            <p>
-              Fixed by implementing server-side article body rendering for
-              the above-the-fold content block and removing the IntersectionObserver
-              gate from the primary content container. Remaining lazy-load
-              logic was preserved for secondary components only. Within 8 weeks
-              all 2,341 articles were indexed and ranking.
-            </p>
-            <div class="project-results" aria-label="Results breakdown">
-              <div class="pr"><span class="pr-val">2,341</span><span class="pr-lbl">Articles indexed</span></div>
-              <div class="pr"><span class="pr-val">+189%</span><span class="pr-lbl">Impressions (GSC)</span></div>
-              <div class="pr"><span class="pr-val">8 wk</span><span class="pr-lbl">Full index coverage</span></div>
-            </div>
-            <div class="project-tools">
-              <span class="p-tool">Vue.js SSR</span>
-              <span class="p-tool">GSC Coverage report</span>
-              <span class="p-tool">URL Inspection API</span>
-              <span class="p-tool">Nuxt</span>
-              <span class="p-timeline">8-week engagement</span>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <!-- Project 04 -->
-      <li class="project-entry fade">
-        <div class="project-top">
-          <span class="project-idx">04</span>
-          <span class="project-type">Local SEO · Healthcare · Multi-location</span>
-          <span class="project-year">2024</span>
-        </div>
-        <div class="project-body">
-          <div class="project-metric" aria-label="480 percent increase in direction requests">
-            <span class="project-metric-val">
-              +<span data-target="480">480</span>%
-            </span>
-            <span class="project-metric-lbl">direction requests<br>in 4 months</span>
-          </div>
-          <div class="project-content">
-            <h3>Healthcare Group: 14-Location Local Pack Strategy</h3>
-            <p>
-              A 14-location private healthcare group had inconsistent GBP
-              profiles across all locations, no local schema on any service
-              pages, and NAP discrepancies across 80+ citation sources. None
-              of the 14 locations appeared in the local 3-pack for their
-              primary service queries. A competitor with objectively weaker
-              clinical credentials outranked every location on proximity alone
-              because their local SEO infrastructure was simply maintained.
-            </p>
-            <p>
-              Full citation audit across 80+ directories, NAP normalisation
-              using the GBP API, LocalBusiness and MedicalClinic schema
-              deployed across all service pages, and a GBP content and
-              category strategy tailored per location. Within 4 months,
-              11 of 14 locations ranked in the local 3-pack for their
-              primary service terms.
-            </p>
-            <div class="project-results" aria-label="Results breakdown">
-              <div class="pr"><span class="pr-val">+480%</span><span class="pr-lbl">Direction requests</span></div>
-              <div class="pr"><span class="pr-val">11/14</span><span class="pr-lbl">Locations in top 3</span></div>
-              <div class="pr"><span class="pr-val">4 mo</span><span class="pr-lbl">Timeline</span></div>
-              <div class="pr"><span class="pr-val">80+</span><span class="pr-lbl">Citations fixed</span></div>
-            </div>
-            <div class="project-tools">
-              <span class="p-tool">GBP API</span>
-              <span class="p-tool">LocalBusiness schema</span>
-              <span class="p-tool">MedicalClinic schema</span>
-              <span class="p-tool">Semrush Local</span>
-              <span class="p-timeline">4-month engagement</span>
-            </div>
-          </div>
-        </div>
-      </li>
-
+        </li>
+      <?php endforeach; ?>
     </ol>
   </div>
 </section>
@@ -940,73 +432,18 @@
     </div>
 
     <div class="insight-list fade" role="list">
-
-      <a href="#" class="insight-entry" role="listitem" aria-label="Read: Why Googlebot Still Struggles With Modern JavaScript">
-        <div>
-          <div class="insight-meta-row">
-            <span class="insight-topic">JavaScript SEO</span>
-            <span class="insight-read">12 min</span>
+      <?php foreach ($insights as $insight): ?>
+        <a href="#" class="insight-entry" role="listitem" aria-label="<?= e($insight['aria']) ?>">
+          <div>
+            <div class="insight-meta-row">
+              <span class="insight-topic"><?= e($insight['topic']) ?></span>
+              <span class="insight-read"><?= e($insight['read']) ?></span>
+            </div>
+            <h3 class="insight-title"><?= e($insight['title']) ?></h3>
           </div>
-          <h3 class="insight-title">Why Googlebot Still Struggles With Modern JavaScript: What To Do About It</h3>
-        </div>
-        <span class="insight-arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a href="#" class="insight-entry" role="listitem" aria-label="Read: Core Web Vitals in Production">
-        <div>
-          <div class="insight-meta-row">
-            <span class="insight-topic">Core Web Vitals</span>
-            <span class="insight-read">9 min</span>
-          </div>
-          <h3 class="insight-title">Core Web Vitals in Production: What CrUX Field Data Tells You That Lighthouse Cannot</h3>
-        </div>
-        <span class="insight-arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a href="#" class="insight-entry" role="listitem" aria-label="Read: SEO is becoming an engineering discipline">
-        <div>
-          <div class="insight-meta-row">
-            <span class="insight-topic">Search Engineering</span>
-            <span class="insight-read">15 min</span>
-          </div>
-          <h3 class="insight-title">SEO Is Becoming an Engineering Discipline: Are Agencies Ready?</h3>
-        </div>
-        <span class="insight-arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a href="#" class="insight-entry" role="listitem" aria-label="Read: AI Overviews and what changes for Technical SEO">
-        <div>
-          <div class="insight-meta-row">
-            <span class="insight-topic">AI &amp; Search</span>
-            <span class="insight-read">11 min</span>
-          </div>
-          <h3 class="insight-title">AI Overviews and Generative Search: What Actually Changes for Technical SEO Practitioners</h3>
-        </div>
-        <span class="insight-arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a href="#" class="insight-entry" role="listitem" aria-label="Read: Internal linking as a systems problem">
-        <div>
-          <div class="insight-meta-row">
-            <span class="insight-topic">Site Architecture</span>
-            <span class="insight-read">8 min</span>
-          </div>
-          <h3 class="insight-title">Internal Linking as a Systems Problem: Modelling PageRank Flow Across Large Sites</h3>
-        </div>
-        <span class="insight-arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a href="#" class="insight-entry" role="listitem" aria-label="Read: The third-party script problem">
-        <div>
-          <div class="insight-meta-row">
-            <span class="insight-topic">Performance</span>
-            <span class="insight-read">10 min</span>
-          </div>
-          <h3 class="insight-title">The Third-Party Script Problem: How Analytics and Chat Tools Are Failing Your Core Web Vitals</h3>
-        </div>
-        <span class="insight-arrow" aria-hidden="true">↗</span>
-      </a>
-
+          <span class="insight-arrow" aria-hidden="true">↗</span>
+        </a>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -1135,7 +572,7 @@
         <a href="#contact">Contact</a>
       </nav>
       <p class="footer-meta">© 2025 · Built without frameworks</p>
-      <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑ top</button>
+      <button class="back-top" aria-label="Back to top">↑ top</button>
     </div>
   </div>
 </footer>
@@ -1150,7 +587,7 @@
     <p class="modal-label label">Insights</p>
     <h3 id="modal-title" class="modal-heading">Article <em>coming soon.</em></h3>
     <p class="modal-body">I'm working on it. Check back shortly or reach out if you want to be notified when it goes live.</p>
-    <a href="#contact" class="modal-cta btn-primary" onclick="closeArticleModal()">Get in touch</a>
+    <a href="#contact" class="modal-cta btn-primary">Get in touch</a>
   </div>
 </div>
 
