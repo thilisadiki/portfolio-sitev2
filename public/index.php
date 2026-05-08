@@ -18,6 +18,7 @@ $insights   = require __DIR__ . '/data/insights.php';
   <meta name="author" content="Jason Sadiki" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://thilisadiki.dev/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Jason Sadiki: Technical SEO &amp; Web Performance Engineer" />
