@@ -1,0 +1,18 @@
+/* ─────────────────────────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────────────────────────── */
+:root {
+  --bg:        #f8f6f1;
+  --bg-1:      #f0ede6;
+  --bg-2:      #e5e1d6;
+  --line:      #d0cdc4;
+  --line-2:    #b4b1a8;
+  --muted:     #5a5650;
+  --sub:       #343028;
+  --text:      #141210;
+  --lime:      #4d7200;       /* dark olive — for text, borders, ink */
+  --lime-fill: #c8ff57;       /* bright lime — for fills, buttons, dots */
+  --lime-bg:   rgba(77,114,0,.06);
+  --sans:      'Inter', system-ui, -apple-system, sans-serif;
+  --mono:      'JetBrains Mono', 'Fira Code', monospace;
+}
