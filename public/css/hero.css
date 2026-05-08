@@ -121,7 +121,7 @@
 }
 
 @media (max-width: 600px) {
-  .hero-inner { padding: 72px 20px 32px; }
+  .hero-inner { padding: 64px 20px 32px; }
   .hero-eyebrow { margin-bottom: 24px; }
   .hero-heading { margin-bottom: 24px; }
   .hero-stats { gap: 24px; }
