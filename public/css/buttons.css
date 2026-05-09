@@ -1,0 +1,13 @@
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 24px; border-radius: var(--r-full); font-size: 14px; font-weight: 500; transition: all .15s; }
+.btn-filled { background: var(--primary); color: var(--on-primary); box-shadow: var(--elev-1); }
+.btn-filled:hover { box-shadow: var(--elev-2); transform: translateY(-1px); }
+.btn-tonal  { background: var(--secondary-container); color: var(--on-secondary-container); }
+.btn-tonal:hover { background: color-mix(in oklab, var(--secondary-container) 85%, var(--on-secondary-container)); }
+.btn-outlined { border: 1px solid var(--outline); color: var(--primary); }
+.btn-outlined:hover { background: color-mix(in oklab, var(--primary) 8%, transparent); }
+.btn-text { color: var(--primary); padding: 0 12px; }
+.btn-text:hover { background: color-mix(in oklab, var(--primary) 8%, transparent); }
+.btn-large { height: 56px; padding: 0 32px; font-size: 16px; border-radius: var(--r-full); }
+
+.icon-btn { width: 40px; height: 40px; border-radius: var(--r-full); display: inline-flex; align-items: center; justify-content: center; transition: background .15s; color: var(--on-surface-variant); font-size: 18px; }
+.icon-btn:hover { background: var(--surface-container); }

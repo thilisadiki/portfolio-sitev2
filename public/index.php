@@ -7,6 +7,27 @@ $expertise  = require __DIR__ . '/data/expertise.php';
 $industries = require __DIR__ . '/data/industries.php';
 $projects   = require __DIR__ . '/data/projects.php';
 $insights   = require __DIR__ . '/data/insights.php';
+
+$skills = [
+    ['JavaScript SEO', 'Rendering'],
+    ['Core Web Vitals', 'Performance'],
+    ['Search Rendering Diagnostics', 'Indexation'],
+    ['Log File Analysis', 'Crawl'],
+    ['Structured Data / JSON-LD', 'Schema'],
+    ['Crawl Budget Optimisation', 'Crawl'],
+    ['Site Architecture', 'Information'],
+    ['Next.js / Nuxt SEO', 'Frameworks'],
+    ['Google Search Console', 'Analytics'],
+    ['Local SEO / GBP', 'Local'],
+    ['Python for SEO', 'Automation'],
+    ['Technical Auditing', 'Diagnostics'],
+];
+
+$tabs = ['About', 'Services', 'Expertise', 'Industries', 'Work', 'Insights'];
+$tabAnchors = [
+    'About' => '#about', 'Services' => '#services', 'Expertise' => '#expertise',
+    'Industries' => '#industries', 'Work' => '#work', 'Insights' => '#insights',
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +41,6 @@ $insights   = require __DIR__ . '/data/insights.php';
   <link rel="canonical" href="https://thilisadiki.dev/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Jason Sadiki: Technical SEO &amp; Web Performance Engineer" />
   <meta property="og:description" content="Senior Technical SEO specialist based in South Africa. JavaScript SEO, Core Web Vitals, search rendering, site architecture." />
   <meta property="og:type" content="website" />
@@ -31,7 +51,6 @@ $insights   = require __DIR__ . '/data/insights.php';
   <meta name="twitter:title" content="Jason Sadiki: Technical SEO &amp; Web Performance Engineer" />
   <meta name="twitter:description" content="Senior Technical SEO specialist based in South Africa." />
 
-  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -44,11 +63,7 @@ $insights   = require __DIR__ . '/data/insights.php';
         "description": "Senior Technical SEO specialist and web performance engineer based in South Africa, specialising in JavaScript SEO, Core Web Vitals optimisation, search rendering diagnostics, and site architecture.",
         "url": "https://thilisadiki.dev/",
         "email": "jason@thilisadiki.dev",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Johannesburg",
-          "addressCountry": "ZA"
-        },
+        "address": { "@type": "PostalAddress", "addressLocality": "Johannesburg", "addressCountry": "ZA" },
         "knowsAbout": ["Technical SEO","JavaScript SEO","Core Web Vitals","Web Performance","Search Rendering","Crawl Optimisation","Structured Data","Log File Analysis","Site Architecture","Local SEO"],
         "sameAs": ["https://www.linkedin.com/in/jasonsadiki/","https://github.com/thilisadiki/"]
       },
@@ -73,16 +88,16 @@ $insights   = require __DIR__ . '/data/insights.php';
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/typography.css" />
-  <link rel="stylesheet" href="css/reveal.css" />
-  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/chips.css" />
+  <link rel="stylesheet" href="css/appbar.css" />
   <link rel="stylesheet" href="css/hero.css" />
-  <link rel="stylesheet" href="css/ticker.css" />
-  <link rel="stylesheet" href="css/section-header.css" />
+  <link rel="stylesheet" href="css/section-head.css" />
   <link rel="stylesheet" href="css/about.css" />
   <link rel="stylesheet" href="css/services.css" />
   <link rel="stylesheet" href="css/expertise.css" />
@@ -90,507 +105,381 @@ $insights   = require __DIR__ . '/data/insights.php';
   <link rel="stylesheet" href="css/projects.css" />
   <link rel="stylesheet" href="css/insights.css" />
   <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/fab.css" />
   <link rel="stylesheet" href="css/footer.css" />
-  <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
 
 <!-- ══════════════════════════════════════════════════════════
-     NAV
+     APP BAR
 ══════════════════════════════════════════════════════════ -->
-<nav id="nav" role="navigation" aria-label="Main navigation">
-  <div class="nav-wrap">
-    <a href="#hero" class="nav-logo">Jason <span>Sadiki</span></a>
-    <div class="nav-links" role="list">
-      <a href="#about"      role="listitem">About</a>
-      <a href="#services"   role="listitem">Services</a>
-      <a href="#expertise"  role="listitem">Expertise</a>
-      <a href="#industries" role="listitem">Industries</a>
-      <a href="#projects"   role="listitem">Work</a>
-      <a href="#insights"   role="listitem">Insights</a>
-      <a href="#contact"    class="nav-cta" role="listitem">Start a project</a>
+<header class="appbar" role="banner">
+  <div class="appbar-row">
+    <a href="#" class="brand" aria-label="Jason Sadiki">
+      <span class="brand-mark">JS</span>
+      <span class="brand-text">Jason <em>Sadiki</em></span>
+    </a>
+    <nav class="appbar-tabs" role="navigation" aria-label="Main navigation">
+      <?php foreach ($tabs as $t): ?>
+        <a href="<?= e($tabAnchors[$t]) ?>" class="appbar-tab" data-tab="<?= e(strtolower($t)) ?>"><?= e($t) ?></a>
+      <?php endforeach; ?>
+    </nav>
+    <div class="appbar-actions">
+      <div class="theme-switch" role="group" aria-label="Theme">
+        <button class="theme-dot" data-theme="violet" aria-label="Violet theme" style="background:#6750A4; color:#6750A4;"></button>
+        <button class="theme-dot is-active" data-theme="ocean"  aria-label="Ocean theme"  style="background:#0061A4; color:#0061A4;"></button>
+        <button class="theme-dot" data-theme="citrus" aria-label="Citrus theme" style="background:#7A5900; color:#7A5900;"></button>
+        <button class="theme-dot" data-theme="forest" aria-label="Forest theme" style="background:#386A20; color:#386A20;"></button>
+      </div>
+      <a href="#contact" class="btn btn-filled appbar-cta">Start a project</a>
+      <button class="appbar-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <button class="nav-burger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </div>
-  <div class="nav-mobile" aria-label="Mobile navigation">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#expertise">Expertise</a>
-    <a href="#industries">Industries</a>
-    <a href="#projects">Work</a>
-    <a href="#insights">Insights</a>
-    <a href="#contact">Start a project</a>
-  </div>
-</nav>
+  <nav id="mobile-menu" class="appbar-mobile" aria-label="Mobile navigation">
+    <?php foreach ($tabs as $t): ?>
+      <a href="<?= e($tabAnchors[$t]) ?>"><?= e($t) ?></a>
+    <?php endforeach; ?>
+    <a href="#contact" class="btn btn-filled">Start a project</a>
+  </nav>
+</header>
+
+<main>
 
 <!-- ══════════════════════════════════════════════════════════
      HERO
 ══════════════════════════════════════════════════════════ -->
-<section id="hero" aria-labelledby="hero-heading">
-  <div class="hero-inner">
-
-    <div class="hero-eyebrow fade">
-      <span class="avail">
-        <span class="avail-dot" aria-hidden="true"></span>
-        Available for new projects
-      </span>
-      <span class="label">Johannesburg, South Africa</span>
+<section id="hero" class="hero" aria-labelledby="hero-h1">
+  <div class="hero-card">
+    <div class="hero-meta">
+      <span class="chip"><span class="chip-dot" aria-hidden="true"></span>Available · Q3 2026</span>
+      <span class="chip tonal">GMT+2 · Johannesburg</span>
+      <span class="chip tonal">8+ years</span>
     </div>
-
-    <h1 id="hero-heading" class="hero-heading fade fade-d1">
-      Search is an<br>
-      <span class="accent">engineering</span><br>
-      problem<span class="accent">.</span>
-    </h1>
-
-    <div class="hero-bottom">
-      <div class="hero-desc fade fade-d2">
-        <p>
-          I help companies build web experiences that are
-          <strong>genuinely discoverable</strong>, not through shortcuts,
-          but through precise technical work at the intersection of search
-          systems and modern web architecture.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn-primary">View Work</a>
-          <a href="#contact"  class="btn-text">Start a conversation →</a>
+    <h1 id="hero-h1" class="hero-h1">Search is an <em>engineering</em> problem.</h1>
+    <div class="hero-actions-row">
+      <a href="#work" class="btn btn-filled btn-large">View case studies</a>
+      <a href="#contact" class="btn btn-text btn-large">Start a conversation →</a>
+    </div>
+  </div>
+  <div class="hero-grid">
+    <div class="hero-desc-card">
+      <p>I help companies build web experiences that are <strong>genuinely discoverable</strong>, through precise technical work at the intersection of search systems and modern web architecture.</p>
+    </div>
+    <div class="hero-stats-card">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-num"><span data-count="8">0</span><span class="suf">+</span></div>
+          <div class="stat-lbl">years in SEO</div>
         </div>
-      </div>
-      <div class="hero-stats fade fade-d3" aria-label="Key statistics">
-        <div class="h-stat">
-          <div class="h-stat-num">
-            <span data-target="8" aria-label="8">8</span><span class="suf">+</span>
-          </div>
-          <div class="h-stat-lbl">years in SEO</div>
+        <div class="stat">
+          <div class="stat-num"><span data-count="60">0</span><span class="suf">+</span></div>
+          <div class="stat-lbl">engagements</div>
         </div>
-        <div class="h-stat">
-          <div class="h-stat-num">
-            <span data-target="60" aria-label="60">60</span><span class="suf">+</span>
-          </div>
-          <div class="h-stat-lbl">projects</div>
-        </div>
-        <div class="h-stat">
-          <div class="h-stat-num">
-            <span data-target="340" aria-label="340">340</span><span class="suf">%</span>
-          </div>
-          <div class="h-stat-lbl">avg organic growth</div>
+        <div class="stat">
+          <div class="stat-num"><span data-count="340">0</span><span class="suf">%</span></div>
+          <div class="stat-lbl">avg organic uplift</div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-     TICKER
-══════════════════════════════════════════════════════════ -->
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Technical SEO <span class="dot"></span></span>
-    <span class="ticker-item">JavaScript SEO <span class="dot"></span></span>
-    <span class="ticker-item">Core Web Vitals <span class="dot"></span></span>
-    <span class="ticker-item">Search Rendering <span class="dot"></span></span>
-    <span class="ticker-item">Crawl Optimisation <span class="dot"></span></span>
-    <span class="ticker-item">Structured Data <span class="dot"></span></span>
-    <span class="ticker-item">Log File Analysis <span class="dot"></span></span>
-    <span class="ticker-item">Site Architecture <span class="dot"></span></span>
-    <span class="ticker-item">Web Performance <span class="dot"></span></span>
-    <span class="ticker-item">Local SEO <span class="dot"></span></span>
-    <span class="ticker-item">Next.js SEO <span class="dot"></span></span>
-    <span class="ticker-item">Indexation Strategy <span class="dot"></span></span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
      ABOUT
 ══════════════════════════════════════════════════════════ -->
-<section id="about" aria-labelledby="about-heading">
-  <div class="wrap">
-    <div class="sec-header">
-      <span class="sec-num">01</span>
-      <h2 id="about-heading" class="sec-title">
-        SEO grew up.<br>
-        Most practitioners <em>didn't.</em>
-      </h2>
+<section id="about" class="sec wrap">
+  <div class="sec-head">
+    <span class="sec-eyebrow">● About</span>
+    <h2 class="sec-title">SEO grew up. <em>Most practitioners didn't.</em></h2>
+    <p class="sec-sub">Why I crossed from keyword research into rendering pipelines and crawl engineering, and what changed when I did.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-card">
+      <p class="lead">I started where most SEOs do: keyword research, on-page fundamentals, link building. That foundation mattered. But I kept watching the real problems compound at a layer those tools couldn't reach.</p>
+      <p>JavaScript frameworks became the dominant way to build for the web. Googlebot's rendering pipeline became a genuine engineering concern. The gap between what a user sees and what a search engine indexes grew into a business-critical problem, and almost no one in SEO was equipped to diagnose it properly.</p>
+      <p>So I crossed that gap deliberately. I learned how the Web Rendering Service actually works, how crawl budgets are allocated, how Core Web Vitals are measured in field data versus lab conditions. Not to pass a certification, but because the problems required it.</p>
+      <p>Today I work at the intersection of search visibility and web engineering. I can diagnose why your Next.js app isn't being indexed, trace a CLS regression to a specific component, or redesign a URL taxonomy that's cannibalising itself, and explain it to both your CTO and your marketing director.</p>
     </div>
-
-    <div class="about-grid">
-      <div class="about-copy">
-        <p class="fade">
-          I started where most SEOs do: keyword research, on-page
-          fundamentals, link building. That foundation mattered.
-          But I kept watching the real problems compound at a layer
-          those tools couldn't reach.
-        </p>
-        <p class="fade fade-d1">
-          JavaScript frameworks became the dominant way to build
-          for the web. Googlebot's rendering pipeline became a
-          genuine engineering concern. <strong>The gap between what
-          a user sees and what a search engine indexes grew into
-          a business-critical problem</strong>, and almost no one
-          in SEO was equipped to diagnose it properly.
-        </p>
-        <p class="fade fade-d2">
-          So I crossed that gap deliberately. I learned how the
-          Web Rendering Service actually works, how crawl budgets
-          are allocated, how Core Web Vitals are measured in field
-          data versus in lab conditions. I started reading
-          engineering documentation and debugging rendering
-          behaviour the way developers do, not to pass a
-          certification, but because the problems required it.
-        </p>
-        <p class="fade fade-d3">
-          Today I work at the intersection of
-          <em>search visibility and web engineering</em>.
-          That means I can diagnose why your Next.js app isn't
-          being indexed, trace a CLS regression to a specific
-          component, or redesign a URL taxonomy that's cannibalising
-          itself, then communicate all of it clearly to both
-          your CTO and your marketing director.
-        </p>
+    <aside class="skills-card" aria-label="Technical focus areas">
+      <div class="skills-head">
+        <h3>Focus areas</h3>
+        <span class="skills-count"><?= count($skills) ?> / <?= count($skills) ?></span>
       </div>
-
-      <aside class="about-aside fade fade-d1" aria-label="Technical skills">
-        <p class="about-aside-title">Technical focus areas</p>
-        <ul>
-          <li class="skill-line"><span class="skill-name">JavaScript SEO</span><span class="skill-cat">Rendering</span></li>
-          <li class="skill-line"><span class="skill-name">Core Web Vitals</span><span class="skill-cat">Performance</span></li>
-          <li class="skill-line"><span class="skill-name">Search Rendering Diagnostics</span><span class="skill-cat">Indexation</span></li>
-          <li class="skill-line"><span class="skill-name">Log File Analysis</span><span class="skill-cat">Crawl</span></li>
-          <li class="skill-line"><span class="skill-name">Structured Data / JSON-LD</span><span class="skill-cat">Schema</span></li>
-          <li class="skill-line"><span class="skill-name">Crawl Budget Optimisation</span><span class="skill-cat">Crawl</span></li>
-          <li class="skill-line"><span class="skill-name">Site Architecture</span><span class="skill-cat">Information</span></li>
-          <li class="skill-line"><span class="skill-name">Next.js / Nuxt SEO</span><span class="skill-cat">Frameworks</span></li>
-          <li class="skill-line"><span class="skill-name">Google Search Console</span><span class="skill-cat">Analytics</span></li>
-          <li class="skill-line"><span class="skill-name">Local SEO / GBP</span><span class="skill-cat">Local</span></li>
-          <li class="skill-line"><span class="skill-name">Python for SEO</span><span class="skill-cat">Automation</span></li>
-          <li class="skill-line"><span class="skill-name">Technical Auditing</span><span class="skill-cat">Diagnostics</span></li>
-        </ul>
-      </aside>
-    </div>
+      <div class="skill-chips">
+        <?php foreach ($skills as [$name, $cat]): ?>
+          <div class="skill-chip">
+            <span class="skill-chip-name"><?= e($name) ?></span>
+            <span class="skill-chip-cat"><?= e($cat) ?></span>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </aside>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
      SERVICES
 ══════════════════════════════════════════════════════════ -->
-<section id="services" aria-labelledby="services-heading">
-  <div class="wrap">
-    <div class="sec-header">
-      <span class="sec-num">02</span>
-      <h2 id="services-heading" class="sec-title">
-        What I do, and<br>
-        how I <em>approach</em> it.
-      </h2>
-    </div>
-
-    <ol class="service-list" aria-label="Services">
-      <?php foreach ($services as $i => $s): ?>
-        <li class="service-entry fade">
-          <span class="service-n" aria-hidden="true"><?= sprintf('%02d', $i + 1) ?></span>
-          <div class="service-main">
-            <h3><?= e($s['title']) ?></h3>
-            <p><?= e($s['description']) ?></p>
+<section id="services" class="sec wrap">
+  <div class="sec-head">
+    <span class="sec-eyebrow">● Services</span>
+    <h2 class="sec-title">What I do, and how I <em>approach it.</em></h2>
+    <p class="sec-sub">Each engagement starts with diagnosis, not templates. Tap a card to expand.</p>
+  </div>
+  <div class="svc-grid">
+    <?php foreach ($services as $i => $s): ?>
+      <button type="button" class="svc-card<?= $i === 0 ? ' is-open' : '' ?>" data-svc="<?= $i ?>" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>">
+        <div class="svc-icon"><?= sprintf('%02d', $i + 1) ?></div>
+        <h3><?= e($s['title']) ?></h3>
+        <div class="svc-tags">
+          <?php foreach ($s['methods'] as $m): ?>
+            <span class="svc-tag"><?= e($m) ?></span>
+          <?php endforeach; ?>
+        </div>
+        <div class="svc-detail-wrap" hidden>
+          <p class="svc-detail"><?= e($s['description']) ?></p>
+          <div class="svc-deliv">
+            <span class="svc-deliv-k">DELIVERABLE</span>
+            <span class="svc-deliv-v"><?= e($s['deliverable']) ?></span>
           </div>
-          <div class="service-meta">
-            <p class="service-deliverable"><strong>Deliverable:</strong> <?= e($s['deliverable']) ?></p>
-            <ul class="service-tags-list" aria-label="Methods">
-              <?php foreach ($s['methods'] as $m): ?>
-                <li class="s-tag"><?= e($m) ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        </li>
-      <?php endforeach; ?>
-    </ol>
+        </div>
+      </button>
+    <?php endforeach; ?>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
      EXPERTISE
 ══════════════════════════════════════════════════════════ -->
-<section id="expertise" aria-labelledby="expertise-heading">
-  <div class="wrap">
-    <div class="sec-header">
-      <span class="sec-num">03</span>
-      <h2 id="expertise-heading" class="sec-title">
-        Technical depth across<br>
-        the full <em>search stack.</em>
-      </h2>
-    </div>
-
-    <div class="expertise-grid fade">
-      <?php foreach ($expertise as $i => $d): ?>
-        <div class="domain">
-          <p class="domain-num"><?= sprintf('%02d', $i + 1) ?></p>
-          <h4><?= e($d['title']) ?></h4>
-          <p><?= e($d['description']) ?></p>
-          <ul class="domain-items">
-            <?php foreach ($d['items'] as $item): ?>
-              <li><?= e($item) ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-      <?php endforeach; ?>
-    </div>
+<section id="expertise" class="sec wrap">
+  <div class="sec-head">
+    <span class="sec-eyebrow">● Expertise</span>
+    <h2 class="sec-title">Technical depth across the full <em>search stack.</em></h2>
+    <p class="sec-sub">Not a list of certifications. The actual layers of search engineering I work at, mapped to the problems they solve.</p>
+  </div>
+  <div class="exp-grid">
+    <?php foreach ($expertise as $i => $d): ?>
+      <article class="exp">
+        <span class="exp-num"><?= sprintf('%02d', $i + 1) ?></span>
+        <h3><?= e($d['title']) ?></h3>
+        <p class="exp-desc"><?= e($d['description']) ?></p>
+        <ul class="exp-items">
+          <?php foreach ($d['items'] as $item): ?>
+            <li class="exp-item-chip"><?= e($item) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </article>
+    <?php endforeach; ?>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
      INDUSTRIES
 ══════════════════════════════════════════════════════════ -->
-<section id="industries" aria-labelledby="industries-heading">
-  <div class="wrap">
-    <div class="sec-header">
-      <span class="sec-num">04</span>
-      <h2 id="industries-heading" class="sec-title">
-        Industries I know<br>
-        from the <em>inside out.</em>
-      </h2>
-    </div>
-
-    <div class="industries-grid fade">
-      <?php foreach ($industries as $i => $ind): ?>
-        <div class="industry">
-          <p class="industry-num"><?= sprintf('%02d', $i + 1) ?></p>
-          <h4><?= e($ind['title']) ?></h4>
-          <p class="industry-sub"><?= e($ind['subtitle']) ?></p>
-          <p><?= e($ind['description']) ?></p>
-          <ul class="industry-signals">
-            <?php foreach ($ind['signals'] as $signal): ?>
-              <li><?= e($signal) ?></li>
-            <?php endforeach; ?>
-          </ul>
+<section id="industries" class="sec wrap">
+  <div class="sec-head">
+    <span class="sec-eyebrow">● Industries</span>
+    <h2 class="sec-title">Verticals I know <em>from the inside out.</em></h2>
+    <p class="sec-sub">Search behaves very differently across compliance regimes, content models, and competitive intensity. Here's where I have direct, repeated experience.</p>
+  </div>
+  <div class="ind-grid">
+    <?php foreach ($industries as $ind): ?>
+      <article class="ind">
+        <div class="ind-head">
+          <h3><?= e($ind['title']) ?></h3>
+          <span class="ind-sub"><?= e($ind['subtitle']) ?></span>
         </div>
-      <?php endforeach; ?>
-    </div>
+        <p class="ind-desc"><?= e($ind['description']) ?></p>
+        <ul class="ind-signals">
+          <?php foreach ($ind['signals'] as $sig): ?>
+            <li><span class="ind-bullet" aria-hidden="true"></span><?= e($sig) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </article>
+    <?php endforeach; ?>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-     PROJECTS
+     WORK
 ══════════════════════════════════════════════════════════ -->
-<section id="projects" aria-labelledby="projects-heading">
-  <div class="wrap">
-    <div class="sec-header">
-      <span class="sec-num">05</span>
-      <h2 id="projects-heading" class="sec-title">
-        Selected work,<br>
-        with <em>actual numbers.</em>
-      </h2>
-    </div>
-
-    <ol class="project-list" aria-label="Case studies">
-      <?php foreach ($projects as $i => $p): ?>
-        <li class="project-entry fade">
-          <div class="project-top">
-            <span class="project-idx"><?= sprintf('%02d', $i + 1) ?></span>
-            <span class="project-type"><?= e($p['type']) ?></span>
-            <span class="project-year"><?= e($p['year']) ?></span>
-          </div>
-          <div class="project-body">
-            <div class="project-metric" aria-label="<?= e($p['metric_aria']) ?>">
-              <span class="project-metric-val"><?= $p['metric_html'] ?></span>
-              <span class="project-metric-lbl"><?= $p['metric_label_html'] ?></span>
-            </div>
-            <div class="project-content">
-              <h3><?= e($p['title']) ?></h3>
-              <?php foreach ($p['paragraphs'] as $para): ?>
-                <p><?= e($para) ?></p>
+<section id="work" class="sec wrap">
+  <div class="sec-head">
+    <span class="sec-eyebrow">● Work</span>
+    <h2 class="sec-title">Selected case studies, with <em>actual numbers.</em></h2>
+    <p class="sec-sub">Real engagements. Real numbers from CrUX, GSC, and analytics, not model outputs.</p>
+  </div>
+  <div class="prj-list">
+    <?php foreach ($projects as $i => $p): ?>
+      <article class="prj">
+        <header class="prj-head">
+          <span class="prj-num"><?= sprintf('%02d', $i + 1) ?></span>
+          <span class="prj-type"><?= e($p['type']) ?></span>
+          <span class="prj-year"><?= e($p['year']) ?></span>
+        </header>
+        <div class="prj-body">
+          <div class="prj-metric-card">
+            <div class="prj-mv"><?= e($p['metricVal']) ?></div>
+            <div class="prj-ml">
+              <?php foreach ($p['metricLabel'] as $line): ?>
+                <div><?= e($line) ?></div>
               <?php endforeach; ?>
-              <div class="project-results" aria-label="Results breakdown">
-                <?php foreach ($p['results'] as [$val, $lbl]): ?>
-                  <div class="pr"><span class="pr-val"><?= e($val) ?></span><span class="pr-lbl"><?= e($lbl) ?></span></div>
-                <?php endforeach; ?>
-              </div>
-              <div class="project-tools">
-                <?php foreach ($p['tools'] as $tool): ?>
-                  <span class="p-tool"><?= e($tool) ?></span>
-                <?php endforeach; ?>
-                <span class="p-timeline"><?= e($p['timeline']) ?></span>
-              </div>
+            </div>
+            <div class="prj-chartwrap" data-spark="<?= e(implode(',', $p['chart']['data'])) ?>"></div>
+            <span class="prj-chart-note"><?= e($p['chart']['note']) ?></span>
+          </div>
+          <div class="prj-content">
+            <h3><?= e($p['title']) ?></h3>
+            <?php foreach ($p['paragraphs'] as $para): ?>
+              <p><?= e($para) ?></p>
+            <?php endforeach; ?>
+            <div class="prj-results">
+              <?php foreach ($p['results'] as [$v, $l]): ?>
+                <div class="prj-r"><div class="prj-rv"><?= e($v) ?></div><div class="prj-rl"><?= e($l) ?></div></div>
+              <?php endforeach; ?>
+            </div>
+            <div class="prj-foot">
+              <?php foreach ($p['tools'] as $tool): ?>
+                <span class="prj-tool"><?= e($tool) ?></span>
+              <?php endforeach; ?>
+              <span class="prj-tl"><?= e($p['timeline']) ?></span>
             </div>
           </div>
-        </li>
-      <?php endforeach; ?>
-    </ol>
+        </div>
+      </article>
+    <?php endforeach; ?>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
      INSIGHTS
 ══════════════════════════════════════════════════════════ -->
-<section id="insights" aria-labelledby="insights-heading">
-  <div class="wrap">
-    <div class="sec-header">
-      <span class="sec-num">06</span>
-      <h2 id="insights-heading" class="sec-title">
-        Thinking on search,<br>
-        the web, and <em>what's next.</em>
-      </h2>
-    </div>
-
-    <div class="insight-list fade" role="list">
-      <?php foreach ($insights as $insight): ?>
-        <a href="#" class="insight-entry" role="listitem" aria-label="<?= e($insight['aria']) ?>">
-          <div>
-            <div class="insight-meta-row">
-              <span class="insight-topic"><?= e($insight['topic']) ?></span>
-              <span class="insight-read"><?= e($insight['read']) ?></span>
-            </div>
-            <h3 class="insight-title"><?= e($insight['title']) ?></h3>
-          </div>
-          <span class="insight-arrow" aria-hidden="true">↗</span>
-        </a>
-      <?php endforeach; ?>
-    </div>
+<section id="insights" class="sec wrap">
+  <div class="sec-head">
+    <span class="sec-eyebrow">● Insights</span>
+    <h2 class="sec-title">Thinking on search, the web, and <em>what's next.</em></h2>
+    <p class="sec-sub">Long-form notes I write when a topic deserves more than a tweet.</p>
+  </div>
+  <div class="ins-grid">
+    <?php foreach ($insights as $insight): ?>
+      <a href="#" class="ins" aria-label="<?= e($insight['aria']) ?>">
+        <div class="ins-meta">
+          <span class="ins-topic"><?= e($insight['topic']) ?></span>
+          <span class="ins-read"><?= e($insight['read']) ?></span>
+        </div>
+        <h3 class="ins-title"><?= e($insight['title']) ?></h3>
+        <span class="ins-arrow" aria-hidden="true">↗</span>
+      </a>
+    <?php endforeach; ?>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
      CONTACT
 ══════════════════════════════════════════════════════════ -->
-<section id="contact" aria-labelledby="contact-heading">
-  <div class="wrap">
-    <div class="sec-header">
-      <span class="sec-num">07</span>
-      <h2 id="contact-heading" class="sec-title">
-        Work with someone who<br>
-        <em>understands the problem.</em>
-      </h2>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-left fade">
-        <p class="contact-statement">
-          If your site has a technical SEO problem: slow crawls,
-          indexation gaps, CWV failures, JavaScript rendering issues.
-          I can diagnose it <span class="accent">precisely</span>
-          and fix it properly.
-        </p>
-        <p class="contact-desc">
-          I keep my client list small on purpose. If you have a real
-          problem and want a technical partner who will actually
-          investigate it, not template-apply a generic audit.
-          reach out.
-        </p>
-        <nav class="contact-links" aria-label="Contact channels">
-          <a href="mailto:jason@thilisadiki.dev" class="c-link">
-            <div class="c-link-info">
-              <p class="c-link-type">Email</p>
-              <p class="c-link-val">jason@thilisadiki.dev</p>
-            </div>
-            <span class="c-link-arrow" aria-hidden="true">↗</span>
+<section id="contact" class="sec wrap">
+  <div class="ctc-card">
+    <div class="ctc-grid">
+      <div>
+        <p class="ctc-statement">Work with someone who <em>understands the problem.</em></p>
+        <p class="ctc-desc">If your site has a technical SEO problem (slow crawls, indexation gaps, CWV failures, JavaScript rendering issues), I can diagnose it precisely and fix it properly.</p>
+        <nav class="ctc-channels" aria-label="Contact channels">
+          <a href="mailto:jason@thilisadiki.dev" class="ctc-ch">
+            <span class="ctc-ch-k">Email</span>
+            <span class="ctc-ch-v">jason@thilisadiki.dev</span>
+            <span class="ctc-ch-arrow" aria-hidden="true">↗</span>
           </a>
-          <a href="tel:+27727655204" class="c-link">
-            <div class="c-link-info">
-              <p class="c-link-type">Phone</p>
-              <p class="c-link-val">072 765 5204</p>
-            </div>
-            <span class="c-link-arrow" aria-hidden="true">↗</span>
+          <a href="tel:+27727655204" class="ctc-ch">
+            <span class="ctc-ch-k">Phone</span>
+            <span class="ctc-ch-v">072 765 5204</span>
+            <span class="ctc-ch-arrow" aria-hidden="true">↗</span>
           </a>
-          <a href="https://www.linkedin.com/in/jasonsadiki/" class="c-link" target="_blank" rel="noopener noreferrer">
-            <div class="c-link-info">
-              <p class="c-link-type">LinkedIn</p>
-              <p class="c-link-val">linkedin.com/in/jasonsadiki</p>
-            </div>
-            <span class="c-link-arrow" aria-hidden="true">↗</span>
+          <a href="https://www.linkedin.com/in/jasonsadiki/" class="ctc-ch" target="_blank" rel="noopener noreferrer">
+            <span class="ctc-ch-k">LinkedIn</span>
+            <span class="ctc-ch-v">linkedin.com/in/jasonsadiki</span>
+            <span class="ctc-ch-arrow" aria-hidden="true">↗</span>
           </a>
-          <a href="https://github.com/thilisadiki/" class="c-link" target="_blank" rel="noopener noreferrer">
-            <div class="c-link-info">
-              <p class="c-link-type">GitHub</p>
-              <p class="c-link-val">github.com/thilisadiki</p>
-            </div>
-            <span class="c-link-arrow" aria-hidden="true">↗</span>
+          <a href="https://github.com/thilisadiki/" class="ctc-ch" target="_blank" rel="noopener noreferrer">
+            <span class="ctc-ch-k">GitHub</span>
+            <span class="ctc-ch-v">github.com/thilisadiki</span>
+            <span class="ctc-ch-arrow" aria-hidden="true">↗</span>
           </a>
         </nav>
       </div>
-
-      <div class="fade fade-d1">
-        <form class="contact-form" id="contact-form" novalidate aria-label="Contact form">
-          <div class="form-row">
-            <div class="form-field">
-              <label for="f-name">Name <span aria-hidden="true">*</span></label>
-              <input type="text" id="f-name" name="name" placeholder="Your name" required autocomplete="name" />
-            </div>
-            <div class="form-field">
-              <label for="f-email">Email <span aria-hidden="true">*</span></label>
-              <input type="email" id="f-email" name="email" placeholder="you@company.com" required autocomplete="email" />
-            </div>
+      <form class="ctc-form" id="contact-form" novalidate aria-label="Contact form">
+        <div class="ctc-row">
+          <div class="ctc-field">
+            <input type="text" id="f-name" name="name" placeholder=" " required autocomplete="name" />
+            <label for="f-name">Name</label>
           </div>
-          <div class="form-field">
-            <label for="f-company">Company / Website</label>
-            <input type="text" id="f-company" name="company" placeholder="yourcompany.com" autocomplete="organization" />
+          <div class="ctc-field">
+            <input type="email" id="f-email" name="email" placeholder=" " required autocomplete="email" />
+            <label for="f-email">Email</label>
           </div>
-          <div class="form-field">
-            <label for="f-service">What do you need help with?</label>
-            <select id="f-service" name="service">
-              <option value="" disabled selected>Select a service area</option>
-              <option>Technical SEO Audit</option>
-              <option>JavaScript SEO</option>
-              <option>Core Web Vitals Optimisation</option>
-              <option>Search Rendering Diagnostics</option>
-              <option>Web Performance Optimisation</option>
-              <option>Site Architecture</option>
-              <option>Local SEO / GBP</option>
-              <option>SEO Consulting</option>
-              <option>Not sure, let's talk</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label for="f-message">Describe the problem <span aria-hidden="true">*</span></label>
-            <textarea id="f-message" name="message" placeholder="What's happening, what you've already tried, and what stack you're working with..." required></textarea>
-          </div>
-          <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;">
-            <label for="f-url">Website URL (leave empty)</label>
-            <input type="text" id="f-url" name="url" tabindex="-1" autocomplete="off" />
-          </div>
-          <div class="form-submit">
-            <button type="submit" id="submit-btn">SEND MESSAGE</button>
-          </div>
-          <p class="form-note">Response within 24 hours. No pitch decks, no sales calls. Just a direct conversation.</p>
-        </form>
-      </div>
+        </div>
+        <div class="ctc-field">
+          <input type="text" id="f-company" name="company" placeholder=" " autocomplete="organization" />
+          <label for="f-company">Company / Website</label>
+        </div>
+        <div class="ctc-field">
+          <select id="f-service" name="service" required>
+            <option value="" disabled selected hidden></option>
+            <?php foreach ($services as $s): ?>
+              <option><?= e($s['title']) ?></option>
+            <?php endforeach; ?>
+            <option>Not sure, let's talk</option>
+          </select>
+          <label for="f-service">Service area</label>
+        </div>
+        <div class="ctc-field">
+          <textarea id="f-message" name="message" placeholder=" " required></textarea>
+          <label for="f-message">Describe the problem</label>
+        </div>
+        <div class="ctc-honeypot" aria-hidden="true">
+          <label for="f-url">Website URL (leave empty)</label>
+          <input type="text" id="f-url" name="url" tabindex="-1" autocomplete="off" />
+        </div>
+        <div class="ctc-submit">
+          <button type="submit" id="submit-btn" class="btn btn-filled btn-large">Send message</button>
+          <span class="ctc-note">Response within 24h. No pitch decks.</span>
+        </div>
+      </form>
     </div>
-
   </div>
 </section>
+
+</main>
 
 <!-- ══════════════════════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════════════════════ -->
-<footer role="contentinfo">
+<footer class="footer" role="contentinfo">
   <div class="wrap">
-    <div class="footer-inner">
-      <p class="footer-name">Jason <span>Sadiki</span> · Johannesburg, South Africa</p>
-      <nav class="footer-nav" aria-label="Footer navigation">
+    <div class="ft-row">
+      <div class="ft-name">
+        <span class="brand-mark">JS</span>
+        Jason <em>Sadiki</em>
+      </div>
+      <nav class="ft-nav" aria-label="Footer navigation">
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#projects">Work</a>
+        <a href="#work">Work</a>
         <a href="#insights">Insights</a>
         <a href="#contact">Contact</a>
       </nav>
-      <p class="footer-meta">© 2025 · Built without frameworks</p>
-      <button class="back-top" aria-label="Back to top">↑ top</button>
+      <div class="ft-meta">© 2026 · Built without frameworks<br/>v3.0 · Material You</div>
     </div>
+    <div class="ft-mantra">Search is an <em>engineering</em> problem.</div>
   </div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════════════
-     MODAL
-══════════════════════════════════════════════════════════ -->
-<div id="article-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
-  <div class="modal-overlay"></div>
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close modal">✕</button>
-    <p class="modal-label label">Insights</p>
-    <h3 id="modal-title" class="modal-heading">Article <em>coming soon.</em></h3>
-    <p class="modal-body">I'm working on it. Check back shortly or reach out if you want to be notified when it goes live.</p>
-    <a href="#contact" class="modal-cta btn-primary">Get in touch</a>
-  </div>
-</div>
+<a href="#contact" class="fab">
+  <span class="fab-ico" aria-hidden="true">→</span>
+  Start a project
+</a>
 
 <script src="main.js"></script>
 </body>

@@ -1,18 +1,49 @@
-/* ─────────────────────────────────────────────────────────────
-   DESIGN TOKENS
-───────────────────────────────────────────────────────────── */
 :root {
-  --bg:        #f8f6f1;
-  --bg-1:      #f0ede6;
-  --bg-2:      #e5e1d6;
-  --line:      #d0cdc4;
-  --line-2:    #b4b1a8;
-  --muted:     #5a5650;
-  --sub:       #343028;
-  --text:      #141210;
-  --lime:      #4d7200;       /* dark olive — for text, borders, ink */
-  --lime-fill: #c8ff57;       /* bright lime — for fills, buttons, dots */
-  --lime-bg:   rgba(77,114,0,.06);
-  --sans:      'Inter', system-ui, -apple-system, sans-serif;
-  --mono:      'JetBrains Mono', 'Fira Code', monospace;
+  --primary:           #0061A4;
+  --on-primary:        #FFFFFF;
+  --primary-container: #D1E4FF;
+  --on-primary-container: #001D36;
+
+  --secondary:           #535F70;
+  --secondary-container: #D7E3F7;
+  --on-secondary-container: #101C2B;
+
+  --tertiary:            #6B5778;
+  --tertiary-container:  #F2DAFF;
+  --on-tertiary-container:#251431;
+
+  --error:               #B3261E;
+  --error-container:     #F9DEDC;
+
+  --surface:             #F7F9FF;
+  --surface-dim:         #DED8E1;
+  --surface-bright:      #F7F9FF;
+  --surface-container-lowest: #FFFFFF;
+  --surface-container-low:    #F1F4FB;
+  --surface-container:        #EBEEF6;
+  --surface-container-high:   #E5E8F0;
+  --surface-container-highest:#DFE3EA;
+
+  --on-surface:          #191C20;
+  --on-surface-variant:  #43474E;
+  --outline:             #79747E;
+  --outline-variant:     #C3C7CF;
+
+  --shadow:              rgba(0,0,0,0.10);
+
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 28px;
+  --r-2xl: 36px;
+  --r-full: 999px;
+
+  --display: "Outfit", "Google Sans", system-ui, sans-serif;
+  --body:    "Roboto Flex", "Roboto", system-ui, sans-serif;
+  --mono:    "Roboto Mono", ui-monospace, monospace;
+
+  --elev-1: 0 1px 2px rgba(0,0,0,0.10), 0 1px 3px 1px rgba(0,0,0,0.06);
+  --elev-2: 0 1px 2px rgba(0,0,0,0.10), 0 2px 6px 2px rgba(0,0,0,0.10);
+  --elev-3: 0 4px 8px 3px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.10);
 }

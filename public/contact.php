@@ -78,8 +78,8 @@ $textBody = "New contact form submission\n"
     . "----------------------------------------\n\n"
     . "Name:    $name\n"
     . "Email:   $email\n"
-    . "Company: " . ($company !== '' ? $company : '—') . "\n"
-    . "Service: " . ($service !== '' ? $service : '—') . "\n\n"
+    . "Company: " . ($company !== '' ? $company : 'n/a') . "\n"
+    . "Service: " . ($service !== '' ? $service : 'n/a') . "\n\n"
     . "Message:\n$message\n";
 
 $esc = fn(string $s) => htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
@@ -88,8 +88,8 @@ $htmlBody = '<div style="font-family:system-ui,sans-serif;font-size:14px;color:#
     . '<table style="border-collapse:collapse;font-size:14px;">'
     . '<tr><td style="padding:4px 12px 4px 0;color:#666;">Name</td><td>' . $esc($name) . '</td></tr>'
     . '<tr><td style="padding:4px 12px 4px 0;color:#666;">Email</td><td><a href="mailto:' . $esc($email) . '">' . $esc($email) . '</a></td></tr>'
-    . '<tr><td style="padding:4px 12px 4px 0;color:#666;">Company</td><td>' . $esc($company !== '' ? $company : '—') . '</td></tr>'
-    . '<tr><td style="padding:4px 12px 4px 0;color:#666;">Service</td><td>' . $esc($service !== '' ? $service : '—') . '</td></tr>'
+    . '<tr><td style="padding:4px 12px 4px 0;color:#666;">Company</td><td>' . $esc($company !== '' ? $company : 'n/a') . '</td></tr>'
+    . '<tr><td style="padding:4px 12px 4px 0;color:#666;">Service</td><td>' . $esc($service !== '' ? $service : 'n/a') . '</td></tr>'
     . '</table>'
     . '<h3 style="margin:24px 0 8px;font-size:14px;">Message</h3>'
     . '<div style="white-space:pre-wrap;line-height:1.5;">' . $esc($message) . '</div>'

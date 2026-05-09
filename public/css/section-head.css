@@ -1,0 +1,5 @@
+.sec-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; max-width: 720px; }
+.sec-eyebrow { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); padding: 6px 14px; background: var(--primary-container); border-radius: var(--r-full); }
+.sec-title { font-family: var(--display); font-size: clamp(32px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 500; color: var(--on-surface); }
+.sec-title em { font-style: italic; font-weight: 400; color: var(--primary); }
+.sec-sub { font-size: 17px; line-height: 1.55; color: var(--on-surface-variant); max-width: 600px; margin-top: 8px; }

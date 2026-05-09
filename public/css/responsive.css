@@ -1,0 +1,33 @@
+@media (max-width: 1100px) {
+  .hero-grid, .about-grid, .ctc-grid, .prj-body, .ind-grid { grid-template-columns: 1fr; gap: 16px; }
+  .skills-card { position: static; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card.is-open { grid-column: span 1; }
+  .exp-grid { grid-template-columns: repeat(2, 1fr); }
+  .exp:nth-child(n) { grid-column: span 1; }
+  .ins-grid { grid-template-columns: repeat(2, 1fr); }
+  .appbar-tabs { display: none; }
+  .theme-switch { display: none; }
+  .appbar-cta { display: none; }
+  .appbar-burger { display: inline-flex; }
+  .appbar-actions { margin-left: auto; }
+}
+@media (max-width: 720px) {
+  .wrap { padding: 0 20px; }
+  .sec { padding-top: 88px; padding-bottom: 88px; }
+  .hero { padding: 16px 16px 56px; }
+  .hero-card { padding: 36px 28px; }
+  .ctc-card { padding: 32px 24px; }
+  .prj { padding: 24px; }
+  .prj-results { grid-template-columns: 1fr 1fr; }
+  .ctc-row { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .ins-grid { grid-template-columns: 1fr; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .about-grid, .ind-grid, .ctc-grid, .hero-grid, .prj-body { gap: 24px; }
+  .ctc-ch { grid-template-columns: 64px minmax(0, 1fr) 24px; gap: 10px; padding: 12px 14px; }
+  .ctc-ch:hover { padding-left: 16px; }
+  .fab { right: 16px; bottom: 16px; height: 56px; padding: 0 18px; font-size: 14px; }
+  .ft-row { grid-template-columns: 1fr; gap: 18px; }
+  .ft-meta { text-align: left; }
+}
